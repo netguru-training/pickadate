@@ -7,5 +7,6 @@
     = javascript_include_tag 'application'
     = csrf_meta_tags
   %body
+    = render 'layouts/menu'
     .container{ role: 'main', class: controller.controller_name }
       = yield
