@@ -1,6 +1,7 @@
 class Event
   include Mongoid::Document
 
+  TIME_UNIT = 0.5
   has_many :users_events
   has_one  :creator , class_name: 'User', inverse_of: nil
   embeds_one :duration
@@ -21,5 +22,9 @@ class Event
     end
 
     return results
+  end
+
+  def time_fields
+    ( ( ( duration.end_date - duration.start_date ) * 24 ) / TIME_UNIT ).round
   end
 end

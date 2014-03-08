@@ -2,7 +2,7 @@ class EventsController < ApplicationController
 
   expose(:all_events) { Event.all.decorate }
   expose(:event, attributes: :permitted_params)
-  expose(:duration) { params[:id].present? ? event.duration : Duration.new }
+  expose_decorated(:duration) { params[:id].present? ? event.duration : Duration.new }
 
   def create
     if event.save
@@ -23,6 +23,9 @@ class EventsController < ApplicationController
   def destroy
     event.destroy
     redirect_to events_path
+  end
+
+  def show
   end
 
   private

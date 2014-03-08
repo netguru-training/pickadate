@@ -1,0 +1,9 @@
+%table.table-bordered
+  %tr
+    - event.time_fields.times do |index|
+      %td
+        = duration.get_hour_from_index index
+  %tr
+    - event.time_fields.times do |index|
+      %td
+        = check_box_tag "field#{index}"
