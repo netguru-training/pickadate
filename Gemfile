@@ -18,6 +18,7 @@ gem 'decent_decoration'
 gem 'draper'
 gem 'bootstrap-sass', '~> 3.0.3.0'
 gem 'sass-rails', '~> 4.0.0'
+gem 'devise'
 
 group :doc do
   gem 'sdoc', require: false
