@@ -2,6 +2,7 @@ class EventsController < ApplicationController
 
   expose(:event, attributes: :permitted_params)
   expose(:events)
+  expose(:duration) { params[:id].present? ? event.duration : Duration.new }
 
   def index
   end
@@ -22,7 +23,7 @@ class EventsController < ApplicationController
   private
 
   def permitted_params
-    params.require(:event).permit(:name)
+    params.require(:event).permit(:name, duration: [:start_date, :end_date])
   end
 
 end
