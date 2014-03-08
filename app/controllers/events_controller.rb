@@ -1,6 +1,6 @@
 class EventsController < ApplicationController
 
-  expose(:event)
+  expose(:event, attributes: :permitted_params)
   expose(:events)
 
   def index
@@ -17,6 +17,12 @@ class EventsController < ApplicationController
   def destroy
     event.destroy
     redirect_to events_path
+  end
+
+  private
+
+  def permitted_params
+    params.require(:event).permit(:name)
   end
 
 end

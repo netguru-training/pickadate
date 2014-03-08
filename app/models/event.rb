@@ -3,4 +3,7 @@ class Event
 
   has_many :users_events
   embeds_one :duration
+
+  field :name, type: String
+
 end
