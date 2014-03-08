@@ -24,3 +24,9 @@ gem 'devise'
 group :doc do
   gem 'sdoc', require: false
 end
+
+group :development, :test do
+  gem 'rspec-rails'
+  gem 'factory_girl_rails'
+  gem 'pry'
+end
