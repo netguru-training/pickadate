@@ -1,7 +1,7 @@
 class EventsController < ApplicationController
 
   expose(:event, attributes: :permitted_params)
-  expose(:events)
+  expose(:events) { Event.all.decorate }
   expose(:duration) { params[:id].present? ? event.duration : Duration.new }
 
   def index

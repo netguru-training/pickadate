@@ -8,9 +8,9 @@
       %th End date
       %th Actions
   %tbody
-    - events.each do |event|
+    - events.each do |e|
       %tr
-        %td= event.name
-        %td= event.duration.start_date
-        %td= event.duration.end_date
+        %td= e.name
+        %td= e.start_date
+        %td= e.end_date
         %td
