@@ -11,4 +11,15 @@ class Event
 
   field :name, type: String
 
+  def match_friends_for_user(user)
+    event_for_user = users_events.find_by(user_id: user.id)
+    results = {}
+
+    (users_events - [event_for_user]).each do |users_event|
+      common_events = event_for_user.availability.zip(users_event.availability).map { |e| e.reduce("&") }
+      results[users_event.user.id.to_s] = common_events
+    end
+
+    return results
+  end
 end

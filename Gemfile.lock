@@ -62,6 +62,7 @@ GEM
       execjs
     coffee-script-source (1.7.0)
     connection_pool (1.2.0)
+    database_cleaner (1.2.0)
     debug_inspector (0.0.2)
     decent_decoration (0.0.6)
       decent_exposure (>= 2.0)
@@ -205,6 +206,7 @@ DEPENDENCIES
   bson
   bson_ext
   coffee-rails (~> 4.0.0)
+  database_cleaner
   decent_decoration
   decent_exposure
   devise
