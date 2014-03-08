@@ -1,6 +1,6 @@
 = simple_form_for event do |f|
   = f.input :name
   = f.simple_fields_for duration do |duration_form|
-    = duration_form.input :start_date
-    = duration_form.input :end_date
+    = duration_form.input :start_date, as: :datetime
+    = duration_form.input :end_date, as: :datetime
   = f.button :submit
