@@ -1,11 +1,8 @@
 class EventsController < ApplicationController
 
+  expose(:all_events) { Event.all.decorate }
   expose(:event, attributes: :permitted_params)
-  expose(:events) { Event.all.decorate }
   expose(:duration) { params[:id].present? ? event.duration : Duration.new }
-
-  def index
-  end
 
   def create
     if event.save

@@ -28,7 +28,9 @@ group :doc do
 end
 
 group :development, :test do
+  gem 'better_errors'
   gem 'rspec-rails'
+  gem 'binding_of_caller'
   gem 'factory_girl_rails'
   gem 'pry'
 end
