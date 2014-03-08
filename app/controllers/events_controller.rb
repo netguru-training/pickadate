@@ -15,6 +15,14 @@ class EventsController < ApplicationController
     end
   end
 
+  def update
+    if event.save
+      redirect_to events_path
+    else
+      render :edit
+    end
+  end
+
   def destroy
     event.destroy
     redirect_to events_path
