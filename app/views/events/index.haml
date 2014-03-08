@@ -1,6 +1,16 @@
 %h1 Events
 
-- events.each do |event|
-  = event.name
-  = event.duration.start_date
-  = event.duration.end_date
+%table.table.table-striped
+  %thead
+    %tr
+      %th Event name
+      %th Start date
+      %th End date
+      %th Actions
+  %tbody
+    - events.each do |event|
+      %tr
+        %td= event.name
+        %td= event.duration.start_date
+        %td= event.duration.end_date
+        %td
