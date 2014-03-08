@@ -75,6 +75,8 @@ GEM
     gon (5.0.4)
       actionpack (>= 2.3.0)
       json
+    haml (4.0.5)
+      tilt
     haml_coffee_assets (1.16.0)
       coffee-script (~> 2.0)
       sprockets (~> 2.0)
@@ -170,6 +172,7 @@ DEPENDENCIES
   devise
   draper
   gon
+  haml
   haml_coffee_assets
   jbuilder (~> 1.2)
   jquery-rails
