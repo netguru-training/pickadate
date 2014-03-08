@@ -9,4 +9,4 @@
 
 # Make sure your secret_key_base is kept private
 # if you're sharing your code publicly.
-Pickadate::Application.config.secret_key_base = '633e3b1d8fa2df579b16aac7360dadd361fa8d6c55d506d5a7b8abb91f667ff126d09063440ed1786351c1d2ed9d05b74db9c0d8eab4a875318d34b79c2fdea8'
+Pickadate::Application.config.secret_key_base = '6710f64457ac80eaf9c9aac8a392434e531d99a5089ce8275cac96b7f5d1f8e1b2cc09a488cd60ed64e2508ebdfa8370144e15293f1b4523b6808e92d0195635'
