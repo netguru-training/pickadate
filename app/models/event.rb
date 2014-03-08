@@ -5,7 +5,7 @@ class Event
   has_one  :creator , class_name: 'User', inverse_of: nil
   embeds_one :duration
 
-  validates :name, presence: true
+  validates :name, presence: true, length: { minimum: 5 }
 
   accepts_nested_attributes_for :duration
 
