@@ -1,3 +1,4 @@
+%h1= event.name
 %table.table-bordered
   %tr
     %td
@@ -8,10 +9,10 @@
     %tr
       %td= users_event.user.email
       - users_event.availability.each do |av_val|
-        %td
+        %td.text-center
           %span.glyphicon{ class: "glyphicon-#{users_event.decorate.cell_from_availability(av_val)}" }
   %tr
     %td
     - event.time_fields.times do |index|
-      %td
+      %td.text-center
         = check_box_tag "field#{index}"
