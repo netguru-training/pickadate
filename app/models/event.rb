@@ -24,6 +24,10 @@ class Event
     return results
   end
 
+  def is_created_by? user
+    creator == user
+  end
+
   def time_fields
     ( ( ( duration.end_date - duration.start_date ) * 24 ) / TIME_UNIT ).round
   end
