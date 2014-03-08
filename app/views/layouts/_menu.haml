@@ -11,6 +11,7 @@
         - if user_signed_in?
           %ul.nav.navbar-nav
             %li= link_to 'Events', events_path
+            %li= link_to 'New event', new_event_path
           %ul.nav.navbar-nav.navbar-right
             %li.dropdown
               = link_to current_user.email, '#', class: 'dropdown-toggle', data: { toggle: 'dropdown' }
