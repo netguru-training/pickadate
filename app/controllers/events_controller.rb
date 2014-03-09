@@ -44,6 +44,7 @@ class EventsController < ApplicationController
   private
 
   def ensure_that_user_is_creator
+    
     redirect_to events_path unless event.is_created_by?(current_user)
   end
 

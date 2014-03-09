@@ -2,12 +2,14 @@ require "spec_helper"
 
 describe EventsController do
 
-
   describe "user logged in" do
+
+    let(:current_user) { create(:user) }
+
     before(:each) do
       @request.env["devise.mapping"] = Devise.mappings[:user]
-      user = FactoryGirl.create(:user)
-      sign_in user
+      sign_in current_user
+      controller.stub(:current_user).and_return(current_user)
     end
       
     describe "GET #index" do
@@ -27,7 +29,7 @@ describe EventsController do
       describe "with valid attributes" do
 
         def post_action 
-          @event_params = {
+        @event_params =  {
             name: 'test name1',
             invite_only: true,
             duration: {
@@ -58,24 +60,25 @@ describe EventsController do
       describe "with valid attributes" do
         before do
           @event = create(:event)
+          current_user.update(event_id: @event.id)
           @event_params = @event.attributes
-          @event_params[:name] = 'different event name'        
+          @event_params["name"] = 'different event name'        
           put :update, id: @event, event: @event_params
-          @event.reload
         end
-
-        it 'updates object'do
-         expect(@event.name).to eq('different event name')
+        it 'updates object' do
+         expect(@event.reload.name).to eq('different event name')
         end
 
         it "successfully redirect to events_path" do
           expect(response).to redirect_to(events_path)
         end
+
       end
 
       describe "with invalid attributes" do
         before do
           @event = create(:event)
+          current_user.update(event_id: @event.id)
           @event_params = @event.attributes
           @event_params[:name] = 'aaa'        
           put :update, id: @event, event: @event_params
@@ -105,17 +108,4 @@ describe EventsController do
   end
 
 
-
-
-    # it "renders the index template" do
-    #   get :index
-    #   expect(response).to render_template("index")
-    # end
-
-    # it "loads all of the posts into @posts" do
-    #   post1, post2 = Post.create!, Post.create!
-    #   get :index
-
-    #   expect(assigns(:posts)).to match_array([post1, post2])
-    # end
 end
