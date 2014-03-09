@@ -1,25 +1,29 @@
 %h1= event.name
+= form_tag(event_users_events_path(event), id: 'event_participants')
+.panel.panel-default
+  .panel-body
+    %table.table
+      %thead
+        %tr
+          %th Attendees
+          - event.time_fields.times do |index|
+            %th.text-center
+              = duration.get_hour_from_index index
+      %tbody
+        - event.users_events.each do |users_event|
+          %tr
+            %td= users_event.user.email
+            - users_event.availability.each do |av_val|
+              %td.text-center{ class: users_event.decorate.cell_class(av_val) }
+                %span.glyphicon{ class: "glyphicon-#{users_event.decorate.cell_from_availability(av_val)}" }
+        - if current_user
+          %tr
+            %td= submit_tag 'Join this event', id: 'event_participants_btn', class: 'btn btn-xs btn-success'
+            - event.time_fields.times do |index|
+              %td.text-center
+                = check_box_tag "field#{index}"
 .panel.panel-default
   .panel-heading Event public url
   .panel-body
     .form-group
       %input.form-control{ value: "#{event_url(event)}?token=#{event.token}" }
-= form_tag(event_users_events_path(event), id: 'event_participants')
-%table.table-bordered
-  %tr
-    %td
-    - event.time_fields.times do |index|
-      %td
-        = duration.get_hour_from_index index
-  - event.users_events.each do |users_event|
-    %tr
-      %td= users_event.user.email
-      - users_event.availability.each do |av_val|
-        %td.text-center
-          %span.glyphicon{ class: "glyphicon-#{users_event.decorate.cell_from_availability(av_val)}" }
-  - if current_user
-    %tr
-      %td= submit_tag 'Join this event', id: 'event_participants_btn', class: 'btn btn-xs btn-success'
-      - event.time_fields.times do |index|
-        %td.text-center
-          = check_box_tag "field#{index}"
