@@ -1,16 +1,19 @@
 require 'spec_helper'
 
 describe 'Event' do
-  let(:event) { Event.create!(name: 'test event', duration: {start_date: DateTime.new(2014, 3, 7, 9, 0, 0), end_date: DateTime.new(2014, 3, 7, 11, 0, 0)}) }
+  let(:event) { create(:event) }
 
-  let(:user1) { User.create!(email: 'foo1@bar.com', password: '12345678', password_confirmation: '12345678') }
-  let(:user2) { User.create!(email: 'foo2@bar.com', password: '12345678', password_confirmation: '12345678') }
-  let(:user3) { User.create!(email: 'foo3@bar.com', password: '12345678', password_confirmation: '12345678') }
+  let(:user1) { create(:user) }
+  let(:user2) { create(:user) }
+  let(:user3) { create(:user) }
+  # let(:user1) { User.create!(email: 'foo1@bar.com', password: '12345678', password_confirmation: '12345678') }
+  # let(:user2) { User.create!(email: 'foo2@bar.com', password: '12345678', password_confirmation: '12345678') }
+  # let(:user3) { User.create!(email: 'foo3@bar.com', password: '12345678', password_confirmation: '12345678') }
 
   before do
-    UsersEvent.create!(availability: [1,1], event: event, user: user1)
-    UsersEvent.create!(availability: [0,1], event: event, user: user2)
-    UsersEvent.create!(availability: [0,0], event: event, user: user3)
+    create(:users_event, availability: [1,1], event: event, user: user1)
+    create(:users_event, availability: [0,1], event: event, user: user2)
+    create(:users_event, event: event, user: user3)
   end
 
   describe '#match_friends' do
