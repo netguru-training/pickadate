@@ -28,6 +28,11 @@ class EventsController < ApplicationController
   def show
   end
 
+  def add_user_to_event
+
+    render nothing: true
+  end
+
   private
 
   def permitted_params
