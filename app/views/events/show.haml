@@ -19,11 +19,7 @@
           %span.glyphicon{ class: "glyphicon-#{users_event.decorate.cell_from_availability(av_val)}" }
   - if current_user
     %tr
-      %td
+      %td= submit_tag 'Join this event', id: 'event_participants_btn', class: 'btn btn-xs btn-success'
       - event.time_fields.times do |index|
         %td.text-center
           = check_box_tag "field#{index}"
-
-    %tr
-      %td
-        = submit_tag "Add to event", id: 'event_participants_btn'
