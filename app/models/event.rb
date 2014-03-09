@@ -11,6 +11,7 @@ class Event
   accepts_nested_attributes_for :duration
 
   field :name, type: String
+  field :invite_only, type: Boolean, default: false
 
   def match_friends_for_user(user)
     event_for_user = users_events.find_by(user_id: user.id)

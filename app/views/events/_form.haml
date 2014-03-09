@@ -1,5 +1,6 @@
 = simple_form_for event do |f|
   = f.input :name
+  = f.input :invite_only, as: :radio_buttons
   = f.simple_fields_for duration do |duration_form|
     = duration_form.input :start_date, as: :datetime, minute_step: 30
     = duration_form.input :end_date, as: :datetime, minute_step: 30

@@ -32,7 +32,7 @@ class EventsController < ApplicationController
   private
 
   def permitted_params
-    params.require(:event).permit(:name, duration: [:start_date, :end_date])
+    params.require(:event).permit(:name, :invite_only, duration: [:start_date, :end_date])
   end
 
 end
