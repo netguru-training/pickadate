@@ -1,1 +1,4 @@
 %h1 Invite friends to your event
+= simple_form_for event do |f|
+  = f.association :guests, as: :check_boxes, collection: User.without_user(current_user)
+  = f.submit

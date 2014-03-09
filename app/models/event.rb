@@ -4,6 +4,7 @@ class Event
   TIME_UNIT = 0.5
   has_many :users_events
   has_one  :creator , class_name: 'User', inverse_of: :event
+  has_and_belongs_to_many :guests, class_name: 'User', inverse_of: nil
   embeds_one :duration
 
   validates :name, presence: true, length: { minimum: 5 }
