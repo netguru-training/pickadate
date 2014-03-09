@@ -41,7 +41,7 @@ class Event
   end
 
   def has_user? user
-    users_events.in(user_id: user.id).present?
+    users_events.in(user_id: user.id).present? if user
   end
 
   private
