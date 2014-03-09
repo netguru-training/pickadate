@@ -11,7 +11,7 @@ describe EventsController do
       sign_in current_user
       controller.stub(:current_user).and_return(current_user)
     end
-      
+
     describe "GET #index" do
       before do
         get :index
@@ -28,27 +28,19 @@ describe EventsController do
     describe "POST #create" do
       describe "with valid attributes" do
 
-        def post_action 
-        @event_params =  {
-            name: 'test name1',
-            invite_only: true,
-            duration: {
-              start_date: DateTime.new(2014, 3, 7, 9, 0, 0),
-              end_date: DateTime.new(2014, 3, 7, 11, 0, 0)
-            }
-          }
-          post :create, event: @event_params
-        end
-
-
         it "saves object" do
-          raise post_action.inspect
-          expect(post_action).to change(Event.count)
-        end
+          expect do
+            event_params = {
+              name: 'test name1',
+              invite_only: true,
+              duration: {
+                start_date: DateTime.new(2014, 3, 7, 9, 0, 0),
+                end_date: DateTime.new(2014, 3, 7, 11, 0, 0)
+              }
+            }
 
-        it "successfully redirects to events_path" do
-          post_action
-          expect(response).to redirect_to(events_path)
+            post :create, event: event_params
+          end.to change(Event, :count).by(1)
         end
 
       end
@@ -62,7 +54,7 @@ describe EventsController do
           @event = create(:event)
           current_user.update(event_id: @event.id)
           @event_params = @event.attributes
-          @event_params["name"] = 'different event name'        
+          @event_params["name"] = 'different event name'
           put :update, id: @event, event: @event_params
         end
         it 'updates object' do
@@ -80,7 +72,7 @@ describe EventsController do
           @event = create(:event)
           current_user.update(event_id: @event.id)
           @event_params = @event.attributes
-          @event_params[:name] = 'aaa'        
+          @event_params[:name] = 'aaa'
           put :update, id: @event, event: @event_params
           @event.reload
         end
@@ -106,6 +98,4 @@ describe EventsController do
       end
     end
   end
-
-
 end

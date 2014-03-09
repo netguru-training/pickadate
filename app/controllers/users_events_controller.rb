@@ -4,15 +4,30 @@ class UsersEventsController < ApplicationController
 
   def create
     users_event = UsersEvent.new(user: current_user, event_id: params[:event_id])
-    users_event.availability = params[:users_event][:avaibility].split(',').map(&:to_i)
+    assign_avaibility(users_event)
+    save_users_event(users_event)
 
-    if users_event.save
-      redirect_to events_path
-    else
-      redirect_to events_path(params[:event_id])
-    end
+    redirect_to event_path(params[:event_id])
   end
 
   def update
+    assign_avaibility(users_event)
+    save_users_event(users_event)
+
+    redirect_to event_path(params[:event_id])
+  end
+
+  def save_users_event(users_event)
+    if users_event.save
+      flash[:success] = "Succesfully updated !"
+    else
+      flash[:danger] = "Update failed !"
+    end
+  end
+
+  private
+
+  def assign_avaibility(users_event)
+    users_event.availability = params[:users_event][:avaibility].split(',').map(&:to_i)
   end
 end
