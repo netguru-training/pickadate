@@ -3,7 +3,7 @@
   = form_tag(event_users_event_path(event, @users_event.id), method: "put", id: 'event_participants')
 - else
   = form_tag(event_users_events_path(event), id: 'event_participants')
-.panel.panel-default
+.panel.panel-default.calendar
   .panel-body
     %table.table
       %thead
