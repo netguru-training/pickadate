@@ -1,7 +1,9 @@
 class EventsController < ApplicationController
 
+  before_filter :ensure_that_user_is_creator, only: [:edit, :update]
+
   expose(:all_events) { Event.all.decorate }
-  expose(:event, attributes: :permitted_params)
+  expose_decorated(:event, attributes: :permitted_params)
   expose_decorated(:duration) { event.duration || Duration.new }
 
   def create
@@ -30,6 +32,10 @@ class EventsController < ApplicationController
   end
 
   private
+
+  def ensure_that_user_is_creator
+    redirect_to events_path unless event.is_created_by?(current_user)
+  end
 
   def permitted_params
     params.require(:event).permit(:name, :invite_only, guest_ids: [], duration: [:start_date, :end_date])
