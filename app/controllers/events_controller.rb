@@ -2,6 +2,7 @@ class EventsController < ApplicationController
 
   before_filter :ensure_that_user_is_creator, only: [:edit, :update]
   before_filter :ensure_that_user_can_see_event, only: [:show]
+  before_filter :authenticate_user!, except: [:show]
 
   expose(:all_events) { Event.all.decorate }
   expose(:event, attributes: :permitted_params)
