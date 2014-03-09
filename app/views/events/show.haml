@@ -23,13 +23,15 @@
           %tr
             %td
               - if @users_event
-                = submit_tag 'Join this event', id: 'event_participants_btn', class: 'btn btn-xs btn-success'
-              - else
                 = submit_tag 'Edit this event', id: 'event_participants_btn', class: 'btn btn-xs btn-success'
+              - else
+                = submit_tag 'Join this event', id: 'event_participants_btn', class: 'btn btn-xs btn-success'
+
             - event.time_fields.times do |index|
+
               - if @users_event
                 %td.text-center
-                  = check_box_tag "field#{index}", '', checked: @users_event.availability[index].zero?
+                  = check_box_tag "field#{index}", '', !@users_event.availability[index].zero?
               - else
                 %td.text-center
                   = check_box_tag "field#{index}"
