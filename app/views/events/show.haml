@@ -1,5 +1,8 @@
 %h1= event.name
-= form_tag(event_users_events_path(event), id: 'event_participants')
+- if @users_event
+  = form_tag(event_users_event_path(event, @users_event.id), method: "put", id: 'event_participants')
+- else
+  = form_tag(event_users_events_path(event), id: 'event_participants')
 .panel.panel-default
   .panel-body
     %table.table
@@ -18,10 +21,19 @@
                 %span.glyphicon{ class: "glyphicon-#{users_event.decorate.cell_from_availability(av_val)}" }
         - if current_user
           %tr
-            %td= submit_tag 'Join this event', id: 'event_participants_btn', class: 'btn btn-xs btn-success'
+            %td
+              - if @users_event
+                = submit_tag 'Join this event', id: 'event_participants_btn', class: 'btn btn-xs btn-success'
+              - else
+                = submit_tag 'Edit this event', id: 'event_participants_btn', class: 'btn btn-xs btn-success'
             - event.time_fields.times do |index|
-              %td.text-center
-                = check_box_tag "field#{index}"
+              - if @users_event
+                %td.text-center
+                  = check_box_tag "field#{index}", '', checked: @users_event.availability[index].zero?
+              - else
+                %td.text-center
+                  = check_box_tag "field#{index}"
+
 .panel.panel-default
   .panel-heading Event public url
   .panel-body

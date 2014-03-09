@@ -40,6 +40,10 @@ class Event
     ( ( ( duration.end_date - duration.start_date ) * 24 ) / TIME_UNIT ).round
   end
 
+  def has_user? user
+    users_events.in(user_ids: user.id).present?
+  end
+
   private
 
   def generate_token

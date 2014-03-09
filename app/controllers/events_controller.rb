@@ -31,10 +31,12 @@ class EventsController < ApplicationController
   end
 
   def show
+    if event.has_user?(current_user)
+      @users_event = event.users_events.find_by(user_id: current_user.id)
+    end
   end
 
   def add_user_to_event
-
     render nothing: true
   end
 
