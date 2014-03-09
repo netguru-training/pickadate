@@ -1,6 +1,11 @@
 Pickadate::Application.routes.draw do
   devise_for :users
   resources :users
-  root to: 'events#index'
-  resources :events
+  root 'events#index'
+  resources :events do
+    member do
+      get 'invite'
+    end
+  end
+
 end
