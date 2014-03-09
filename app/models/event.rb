@@ -30,6 +30,10 @@ class Event
     creator == user
   end
 
+  def is_visible_for_user? user
+    !self.invite_only || self.is_created_by?(user) || self.guests.include?(user)
+  end
+
   def time_fields
     ( ( ( duration.end_date - duration.start_date ) * 24 ) / TIME_UNIT ).round
   end
