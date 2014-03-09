@@ -6,6 +6,7 @@ class EventsController < ApplicationController
 
   def create
     if event.save
+      event.update_attributes(creator: current_user)
       redirect_to events_path
     else
       render :new

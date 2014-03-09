@@ -15,6 +15,6 @@
         %td= e.end_date
         %td
           = link_to 'Show event', event_path(e), class: 'btn btn-xs btn-default'
-          - if event.is_created_by?(current_user)
+          - if e.is_created_by?(current_user)
             = link_to 'Edit event', edit_event_path(e), class: 'btn btn-xs btn-default'
             = link_to 'Destroy event', event_path(e), method: :delete, class: 'btn btn-xs btn-default'
