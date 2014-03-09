@@ -1,0 +1,11 @@
+%h1 Users
+%table.table.table-striped
+  %thead
+    %tr
+      %th Num
+      %th Email
+  %tbody
+    - users.each_with_index do |u, i|
+      %tr
+        %td= i + 1
+        %td= u.email

@@ -9,12 +9,14 @@
       %th Actions
   %tbody
     - all_events.each do |e|
-      %tr
-        %td= e.name
-        %td= e.start_date
-        %td= e.end_date
-        %td
-          = link_to 'Show event', event_path(e), class: 'btn btn-xs btn-default'
-          - if event.is_created_by?(current_user)
-            = link_to 'Edit event', edit_event_path(e), class: 'btn btn-xs btn-default'
-            = link_to 'Destroy event', event_path(e), method: :delete, class: 'btn btn-xs btn-default'
+      - if e.is_visible_for_user?(current_user)
+        %tr
+          %td= e.name
+          %td= e.start_date
+          %td= e.end_date
+          %td
+            = link_to 'Show event', event_path(e), class: 'btn btn-xs btn-default'
+            - if e.is_created_by?(current_user)
+              = link_to 'Edit event', edit_event_path(e), class: 'btn btn-xs btn-default'
+              = link_to 'Invite friends', invite_event_path(e), class: 'btn btn-xs btn-default'
+              = link_to 'Destroy event', event_path(e), method: :delete, class: 'btn btn-xs btn-default'
