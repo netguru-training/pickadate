@@ -1,18 +1,41 @@
 %h1= event.name
-%table.table-bordered
-  %tr
-    %td
-    - event.time_fields.times do |index|
-      %td
-        = duration.get_hour_from_index index
-  - event.users_events.each do |users_event|
-    %tr
-      %td= users_event.user.email
-      - users_event.availability.each do |av_val|
-        %td.text-center
-          %span.glyphicon{ class: "glyphicon-#{users_event.decorate.cell_from_availability(av_val)}" }
-  %tr
-    %td
-    - event.time_fields.times do |index|
-      %td.text-center
-        = check_box_tag "field#{index}"
+- if @users_event
+  = form_tag(event_users_event_path(event, @users_event.id), method: "put", id: 'event_participants')
+- else
+  = form_tag(event_users_events_path(event), id: 'event_participants')
+.panel.panel-default
+  .panel-body
+    %table.table
+      %thead
+        %tr
+          %th Attendees
+          - event.time_fields.times do |index|
+            %th.text-center
+              = duration.get_hour_from_index index
+      %tbody
+        - event.users_events.each do |users_event|
+          %tr
+            %td= users_event.user.email
+            - users_event.availability.each do |av_val|
+              %td.text-center{ class: users_event.decorate.cell_class(av_val) }
+                %span.glyphicon{ class: "glyphicon-#{users_event.decorate.cell_from_availability(av_val)}" }
+        - if current_user
+          %tr
+            %td
+              - if @users_event
+                = submit_tag 'Join this event', id: 'event_participants_btn', class: 'btn btn-xs btn-success'
+              - else
+                = submit_tag 'Edit this event', id: 'event_participants_btn', class: 'btn btn-xs btn-success'
+            - event.time_fields.times do |index|
+              - if @users_event
+                %td.text-center
+                  = check_box_tag "field#{index}", '', checked: @users_event.availability[index].zero?
+              - else
+                %td.text-center
+                  = check_box_tag "field#{index}"
+
+.panel.panel-default
+  .panel-heading Event public url
+  .panel-body
+    .form-group
+      %input.form-control{ value: "#{event_url(event)}?token=#{event.token}" }

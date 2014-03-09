@@ -6,6 +6,6 @@ Pickadate::Application.routes.draw do
     member do
       get 'invite'
     end
+    resources :users_events
   end
-
 end
