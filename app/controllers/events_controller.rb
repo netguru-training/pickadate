@@ -1,4 +1,5 @@
 class EventsController < ApplicationController
+  respond_to :html
 
   expose(:all_events) { Event.all.decorate }
   expose(:event, attributes: :permitted_params)
