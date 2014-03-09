@@ -7,7 +7,7 @@ class UsersEventsController < ApplicationController
     users_event.availability = params[:users_event][:avaibility].split(',').map(&:to_i)
 
     if users_event.save
-      redirect_to events_path
+      redirect_to event_path(params[:event_id])
     else
       redirect_to event_path(params[:event_id])
     end
