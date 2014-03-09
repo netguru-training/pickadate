@@ -1,9 +1,9 @@
 %h1= event.name
 .panel.panel-default
-  .panel-heading Event token
+  .panel-heading Event public url
   .panel-body
     .form-group
-      %input.form-control{ value: event.token }
+      %input.form-control{ value: "#{event_url(event)}?token=#{event.token}" }
 = form_tag(event_users_events_path(event), id: 'event_participants')
 %table.table-bordered
   %tr

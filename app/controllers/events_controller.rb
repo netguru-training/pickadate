@@ -1,8 +1,8 @@
 class EventsController < ApplicationController
 
+  skip_before_filter :authenticate_user!, only: [:show]
   before_filter :ensure_that_user_is_creator, only: [:edit, :update]
   before_filter :ensure_that_user_can_see_event, only: [:show]
-  before_filter :authenticate_user!, except: [:show]
 
   expose(:all_events) { Event.all.decorate }
   expose(:event, attributes: :permitted_params)
@@ -45,7 +45,7 @@ class EventsController < ApplicationController
   end
 
   def ensure_that_user_can_see_event
-    redirect_to events_path unless event.is_visible_for_user?(current_user)
+    redirect_to events_path if params[:token] != event.token or !event.is_visible_for_user?(current_user)
   end
 
   def permitted_params
