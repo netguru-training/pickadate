@@ -17,12 +17,13 @@
       - users_event.availability.each do |av_val|
         %td.text-center
           %span.glyphicon{ class: "glyphicon-#{users_event.decorate.cell_from_availability(av_val)}" }
-  %tr
-    %td
-    - event.time_fields.times do |index|
-      %td.text-center
-        = check_box_tag "field#{index}"
+  - if current_user
+    %tr
+      %td
+      - event.time_fields.times do |index|
+        %td.text-center
+          = check_box_tag "field#{index}"
 
-  %tr
-    %td
-      = submit_tag "Add to event", id: 'event_participants_btn'
+    %tr
+      %td
+        = submit_tag "Add to event", id: 'event_participants_btn'

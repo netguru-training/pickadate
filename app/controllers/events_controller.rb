@@ -45,8 +45,9 @@ class EventsController < ApplicationController
   end
 
   def ensure_that_user_can_see_event
-    redirect_to events_path if params[:token] != event.token or !event.is_visible_for_user?(current_user)
+    redirect_to events_path if params[:token] != event.token and !event.is_visible_for_user?(current_user)
   end
+
 
   def permitted_params
     params.require(:event).permit(:name, :invite_only, guest_ids: [], duration: [:start_date, :end_date])

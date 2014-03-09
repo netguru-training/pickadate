@@ -33,7 +33,7 @@ class Event
   end
 
   def is_visible_for_user? user
-    !self.invite_only || self.is_created_by?(user) || self.guests.include?(user)
+    user.present? ? !self.invite_only || self.is_created_by?(user) || self.guests.include?(user) : false
   end
 
   def time_fields
